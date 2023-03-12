@@ -120,4 +120,8 @@ all: $(tests_dump)
 # Clean up
 
 clean:
-	rm -rf $(junk)
+	rm -rf $(junk) build/
+
+
+# Lab Test Environmet
+include lab.mk
