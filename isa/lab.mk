@@ -1,5 +1,7 @@
 SV ?= Sv39
 
+ARCH = riscv64
+
 define compile_lab
 
 ALL += $$($(1)_sc_tests)

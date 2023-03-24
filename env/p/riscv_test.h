@@ -9,11 +9,11 @@
 // Begin Macro
 //-----------------------------------------------------------------------
 
-#ifdef RVTEST_AM
-#define LAB_HALT jal _halt
+#ifdef RVTEST_LAB
+#define LAB_EXIT jal _exit
 #define INIT_SP la sp, _stack_pointer
 #else
-#define LAB_HALT
+#define LAB_EXIT
 #define INIT_SP
 #endif
 
@@ -202,7 +202,7 @@ handle_exception:                                                       \
         sw TESTNUM, tohost, t5;                                         \
         sw zero, tohost + 4, t5;                                        \
         INIT_SP;                                                        \
-        LAB_HALT;                                                        \
+        LAB_EXIT;                                                        \
         j write_tohost;                                                 \
 reset_vector:                                                           \
         INIT_XREG;                                                      \
@@ -277,6 +277,12 @@ reset_vector:                                                           \
         .popsection;                                                    \
         .align 4; .global begin_signature; begin_signature:
 
+#ifdef RVTEST_LAB
+#undef RVTEST_DATA_BEGIN
+#define RVTEST_DATA_BEGIN                                               \
+        EXTRA_DATA                                                      \
+        .align 4; .global begin_signature; begin_signature:
+#endif
 #define RVTEST_DATA_END .align 4; .global end_signature; end_signature:
 
 #endif
