@@ -1,5 +1,6 @@
 SV ?= Sv39
 
+MAKEFLAGS += -j
 ARCH = riscv64
 
 define compile_lab

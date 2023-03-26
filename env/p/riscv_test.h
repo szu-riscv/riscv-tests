@@ -277,12 +277,15 @@ reset_vector:                                                           \
         .popsection;                                                    \
         .align 4; .global begin_signature; begin_signature:
 
+#ifdef PLAT_SPIKE
 #ifdef RVTEST_LAB
 #undef RVTEST_DATA_BEGIN
 #define RVTEST_DATA_BEGIN                                               \
         EXTRA_DATA                                                      \
         .align 4; .global begin_signature; begin_signature:
 #endif
+#endif
+
 #define RVTEST_DATA_END .align 4; .global end_signature; end_signature:
 
 #endif
